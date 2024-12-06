@@ -1,0 +1,17 @@
+::ng-deep .mat-expansion-panel {
+  background: transparent !important; /* Removes the background of the panel */
+  box-shadow: none !important;  /* Removes any shadow if it's there */
+}
+
+::ng-deep .mat-expansion-panel-header {
+  background: transparent !important; /* Removes the background of the header */
+  border: none !important;  /* Removes the border if it's there */
+}
+
+::ng-deep .mat-expansion-panel-header .mat-expansion-indicator {
+  color: inherit !important; /* Makes the indicator (expand/collapse arrow) inherit its color */
+}
+
+::ng-deep .mat-expansion-panel-header .mat-expansion-panel-header-title {
+  color: inherit !important; /* Retain or adjust the title color */
+}

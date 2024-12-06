@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-4">
+  <div class="px-6 py-6 flex flex-col gap-4">
+    <div class="flex flex-row">
+      <a href="/" class="bg-cyan-600 text-white text-xl font-bold px-4 py-1 rounded-md">Home</a>
+    </div>
+  </div>
+  <div class="flex flex-row justify-center gap-2 px-6">
+    <input (keyup.enter)="onSearchEnter()" [(ngModel)]="search" placeholder="Global Search" class="border border-black px-2 rounded-md text-xl w-full py-2" />
+  </div>
+  <app-view-commits [repositoryId]="repositoryId"></app-view-commits>
+  <app-view-issues [repositoryId]="repositoryId"></app-view-issues>
+  <app-view-pull-requests [repositoryId]="repositoryId"></app-view-pull-requests>
+  <app-view-change-logs [repositoryId]="repositoryId"></app-view-change-logs>
+</div>

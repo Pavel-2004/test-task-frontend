@@ -1,0 +1,21 @@
+<div class="px-6 py-6 flex flex-col gap-4">
+  <div class="flex flex-row">
+    <a href="/" class="bg-cyan-600 text-white text-xl font-bold px-4 py-1 rounded-md">Back</a>
+  </div>
+</div>
+<div class="flex flex-col px-6 gap-4">
+  <p class="text-2xl font-bold text-black">Repositories</p>
+  <div class="ag-theme-alpine mt-2" style="width: 100%;">
+    <ag-grid-angular
+      style="width: 100%; height: 300px;"
+      class="ag-theme-alpine"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [datasource]="dataSource"
+      [pagination]="true"
+      >
+    </ag-grid-angular>
+  </div>
+  <div class="mt-2"></div>
+  <app-view-users [organizationId]="organizationId"></app-view-users>
+</div>

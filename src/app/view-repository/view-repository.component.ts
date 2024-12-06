@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';  // Import CommonModule for *ngIf
-import { MatButtonModule } from '@angular/material/button';  // For Angular Material buttons
+import { CommonModule } from '@angular/common';  
+import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
 import { ViewCommitsComponent } from "../view-commits/view-commits.component";

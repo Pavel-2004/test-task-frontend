@@ -25,7 +25,6 @@ function dateFormatter(params: { value: string }): string {
 export class ViewCommitsComponent {
   @Input() repositoryId = '';
 
-  // Define column definitions as a constant
   readonly columnDefs: ColDef[] = [
     { 
       headerName: 'Author Name', 
@@ -60,7 +59,6 @@ export class ViewCommitsComponent {
     }
   ];
 
-  // Define grid options as a constant
   readonly gridOptions: GridOptions = {
     rowModelType: 'infinite',
     cacheBlockSize: 20,
@@ -68,7 +66,6 @@ export class ViewCommitsComponent {
     paginationPageSizeSelector: [10, 20, 50]
   };
 
-  // Consolidated data source method
   dataSource = {
     getRows: (params: { 
       sortModel: any[], 

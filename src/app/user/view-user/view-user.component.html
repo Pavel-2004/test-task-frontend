@@ -1,0 +1,26 @@
+<div class="flex flex-col gap-4">
+  <div class="px-6 py-6 flex flex-col gap-4">
+    <div class="flex flex-row">
+      <a href="/" class="bg-cyan-600 text-white text-xl font-bold px-4 py-1 rounded-md">Home</a>
+    </div>
+  </div>
+  <div class="px-6 flex flex-col">
+    <div class="bg-slate-100 rounded-md px-4 py-4 flex flex-col">
+      <div class="flex flex-row gap-2">
+        <div class="flex flex-col overflow-hidden h-10 w-10 rounded-full justify-center">
+          <div class="flex flex-row justify-center">
+            <img src="{{avatarUrl}}" />
+          </div>
+        </div>
+        <div class="flex flex-col gap-2 justify-center">
+          <p class="text-2xl font-bold text-black">{{login}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row justify-center gap-2 px-6">
+    <input (keyup.enter)="onSearchEnter()" [(ngModel)]="search" placeholder="Global Search" class="border border-black px-2 rounded-md text-xl w-full py-2" />
+  </div>
+  <app-view-commits [userId]="userId"></app-view-commits>
+  <app-view-issues [userId]="userId"></app-view-issues>
+</div>

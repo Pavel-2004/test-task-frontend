@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AgGridModule } from 'ag-grid-angular';  
 import { GridOptions, ColDef } from 'ag-grid-community';
-import { GitHubIntegrationService } from '../services/github-integration.service';
+import { GitHubIntegrationService } from '../../../services/github-integration.service';
 
 function dateFormatter(params: { value: string }): string {
   return params.value ? new Date(params.value).toLocaleDateString() : '';
@@ -23,7 +23,9 @@ function dateFormatter(params: { value: string }): string {
   styleUrl: './view-commits.component.css'
 })
 export class ViewCommitsComponent {
-  @Input() repositoryId = '';
+  @Input() userId = '';
+
+  constructor(private gitHubService: GitHubIntegrationService) {}
 
   readonly columnDefs: ColDef[] = [
     { 
@@ -63,7 +65,7 @@ export class ViewCommitsComponent {
     },
     { 
       headerName: 'Creation Date', 
-      field: 'created_at', 
+      field: 'date', 
       sortable: true, 
       filter: 'agDateColumnFilter', 
       valueFormatter: dateFormatter 
@@ -88,27 +90,22 @@ export class ViewCommitsComponent {
     }) => {
       const { sortModel, filterModel, startRow, endRow, successCallback, failCallback } = params;
       
-      this.gitHubService.getCommits(sortModel, filterModel, startRow, endRow, this.repositoryId, '')
+      this.gitHubService.getCommitsUser(sortModel, filterModel, startRow, endRow, this.userId, '')
         .subscribe({
-          next: (data: any) => {
-            console.log(data, 'data')
-            successCallback(data.rows, data.totalRecords)},
+          next: (data: any) => successCallback(data.rows, data.totalRecords),
           error: () => failCallback()
         });
     }
   };
-
-  constructor(private gitHubService: GitHubIntegrationService) {}
 
   updateCommits(globalSearch: string): void {
     this.dataSource = {
       getRows: (params: any) => {
         const { sortModel, filterModel, startRow, endRow, successCallback, failCallback } = params;
         
-        this.gitHubService.getCommits(sortModel, filterModel, startRow, endRow, this.repositoryId, globalSearch)
+        this.gitHubService.getCommitsUser(sortModel, filterModel, startRow, endRow, this.userId, globalSearch)
           .subscribe({
             next: (data: any) => {
-              console.log(data.rows, 'rows')
               successCallback(data.rows, data.totalRecords)},
             error: () => failCallback()
           });

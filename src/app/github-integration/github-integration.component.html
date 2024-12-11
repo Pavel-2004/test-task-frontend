@@ -1,6 +1,11 @@
 <head>
   <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css" />
 </head>
+<div *ngIf="isLoadingStatus" style="z-index: 1;" class="fixed top-0 left-0 right-0 bottom-0 bg-white flex flex-col justify-center">
+  <div class="flex flex-row justify-center">
+    <mat-progress-spinner></mat-progress-spinner>
+  </div>
+</div>
 <mat-expansion-panel [(expanded)]="panelExpanded">
   <mat-expansion-panel-header>
     <mat-panel-title>
@@ -30,10 +35,13 @@
       <p class="text-center text-black text-xl mt-2 font-bold">Connect To GitHub</p>
     </div>
     <div *ngIf="isConnected" class="w-full flex flex-col px-4 py-4">
-      <div class="flex flex-row justify-end">
+      <div *ngIf="!isDisconnecting" class="flex flex-row justify-end">
         <button (click)="disconnect()" class="bg-cyan-600 text-white rounded-md px-10 py-2">
           Disconnect
         </button>
+      </div>
+      <div *ngIf="isDisconnecting" class="flex flex-row justify-end">
+        <img style="height: 50px;" src="/loading.svg" />
       </div>
     </div>
 </mat-expansion-panel>

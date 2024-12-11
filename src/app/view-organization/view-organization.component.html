@@ -3,8 +3,34 @@
     <a href="/" class="bg-cyan-600 text-white text-xl font-bold px-4 py-1 rounded-md">Back</a>
   </div>
 </div>
-<div class="flex flex-col px-6 gap-4">
-  <p class="text-2xl font-bold text-black">Repositories</p>
+<div class="flex flex-col px-6">
+  <div class="bg-slate-100 rounded-md px-4 py-4 flex flex-col gap-2">
+    <div class="flex flex-row gap-4">
+      <div class="flex flex-col overflow-hidden h-16 w-16 rounded-full justify-center">
+        <div class="flex flex-row justify-center">
+          <img src="{{avatarUrl}}" />
+        </div>
+      </div>
+      <div class="flex flex-col gap-2 flex-1">
+        <p class="text-2xl font-bold text-black">{{name}}</p>
+        <p class="text-lg">
+          {{description}}
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-3 flex flex-col">
+        <p class="font-bold text-md text-black">Repos Url</p>
+        <a target="_blank" href="{{reposUrl}}" class="text-blue-500 underline font-bold">{{reposUrl}}</a>
+      </div>
+      <div class="col-span-3 flex flex-col">
+        <p class="font-bold text-md text-black">Members Url</p>
+        <a target="_blank" href="{{membersUrl}}" class="text-blue-500 underline font-bold">{{membersUrl}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex flex-col px-6 gap-4 mt-4">
   <div class="ag-theme-alpine mt-2" style="width: 100%;">
     <ag-grid-angular
       style="width: 100%; height: 300px;"
@@ -16,6 +42,6 @@
       >
     </ag-grid-angular>
   </div>
-  <div class="mt-2"></div>
+  <div class="mt-4"></div>
   <app-view-users [organizationId]="organizationId"></app-view-users>
 </div>

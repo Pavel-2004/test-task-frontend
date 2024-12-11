@@ -28,7 +28,27 @@ function dateFormatter(params: any) {
 export class ViewIssuesComponent {
   @Input() repositoryId: string = '';
   columnDefs = [
-    { headerName: 'User', field: 'user', sortable: true, filter: 'agTextColumnFilter' },
+    { headerName: 'Action', sortable: false, filter: false, field: 'action', cellRenderer: (params: any) => {
+      const button = document.createElement('button');
+      button.innerText = 'View';
+      button.addEventListener('click', () => {
+        const ticketId = params.data._id; 
+        window.location.href = `/view-ticket/${ticketId}`
+      });
+      return button;
+    } },
+    { 
+      headerName: 'Avatar', 
+      field: 'user.avatarUrl', 
+      sortable: false, 
+      filter: false,
+      cellRenderer: (params: any) => {
+        return params.value 
+          ? `<img src="${params.value}" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"/>` 
+          : '';
+      }
+    },
+    { headerName: 'User', field: 'user.login', sortable: true, filter: 'agTextColumnFilter' },
     { headerName: 'title', field: 'title', sortable: true, filter: 'agTextColumnFilter' },
     { headerName: 'Body', field: 'body', sortable: true, filter: 'agTextColumnFilter' },
     { headerName: 'State', field: 'state', sortable: true, filter: 'agTextColumnFilter' },
@@ -57,6 +77,7 @@ export class ViewIssuesComponent {
         .subscribe(data => {
           params.successCallback(data.rows, data.totalRecords); 
         }, error => {
+          console.log(error, 'error')
           params.failCallback();
         });
     }

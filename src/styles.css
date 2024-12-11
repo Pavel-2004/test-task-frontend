@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.error-toast {
+  background-color: #f44336;
+  color: white;
+}

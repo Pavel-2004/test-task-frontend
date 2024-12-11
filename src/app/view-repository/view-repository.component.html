@@ -4,11 +4,16 @@
       <a href="/" class="bg-cyan-600 text-white text-xl font-bold px-4 py-1 rounded-md">Home</a>
     </div>
   </div>
+  <div class="px-6 flex flex-col">
+    <div class="bg-slate-100 rounded-md px-4 py-4">
+      <p class="font-bold text-2xl text-black">{{name}}</p>
+      <p class="text-xl text-black">{{description}}</p>
+      <a class="text-blue-500 underline text-lg" href="{{url}}">{{url}}</a>
+    </div>
+  </div>
   <div class="flex flex-row justify-center gap-2 px-6">
     <input (keyup.enter)="onSearchEnter()" [(ngModel)]="search" placeholder="Global Search" class="border border-black px-2 rounded-md text-xl w-full py-2" />
   </div>
   <app-view-commits [repositoryId]="repositoryId"></app-view-commits>
   <app-view-issues [repositoryId]="repositoryId"></app-view-issues>
-  <app-view-pull-requests [repositoryId]="repositoryId"></app-view-pull-requests>
-  <app-view-change-logs [repositoryId]="repositoryId"></app-view-change-logs>
 </div>

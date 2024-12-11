@@ -20,9 +20,29 @@ import { GridOptions } from 'ag-grid-community';
 export class ViewUsersComponent {
   @Input() organizationId: string = '';
   columnDefs = [
+    { headerName: 'Action', sortable: false, filter: false, field: 'action', cellRenderer: (params: any) => {
+      const button = document.createElement('button');
+      button.innerText = 'View';
+      button.addEventListener('click', () => {
+        const userId = params.data._id; 
+        window.location.href = `/view-user/${userId}`
+      });
+      return button;
+    } },
+    { 
+      headerName: 'Avatar', 
+      field: 'avatarUrl', 
+      sortable: false, 
+      filter: false,
+      cellRenderer: (params: any) => {
+        return params.value 
+          ? `<img src="${params.value}" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;"/>` 
+          : '';
+      }
+    },
     { headerName: 'Username', field: 'login', sortable: true, filter: 'agTextColumnFilter' },
     { headerName: 'Profile URL', field: 'url', sortable: true, filter: 'agTextColumnFilter' },
-    { headerName: 'Admin', field: 'admin', sortable: true, filter: 'agBooleanColumnFilter' }
+    { headerName: 'Admin', field: 'admin', sortable: true, filter: 'agBooleanColumnFilter' },
   ]
 
   gridOptions: GridOptions = {
@@ -45,6 +65,7 @@ export class ViewUsersComponent {
         .subscribe(data => {
           params.successCallback(data.rows, data.totalRecords);
         }, error => {
+          console.log(error, 'error')
           params.failCallback();
         });
     }

@@ -1,0 +1,58 @@
+<div class="px-6 py-6 flex flex-col gap-4">
+  <div class="flex flex-row">
+    <a href="/" class="bg-cyan-600 text-white text-xl font-bold px-4 py-1 rounded-md">Home</a>
+  </div>
+</div>
+<div class="flex flex-col px-6">
+  <div class="bg-slate-100 rounded-md px-4 py-4 flex flex-col gap-2">
+    <div class="flex flex-row justify-between">
+      <div class="flex flex-col">
+        <p class="text-black text-xl font-bold">{{title}}</p>
+      </div>
+      <div class="flex flex-col">
+        <span *ngIf="status == 'open'" class="bg-green-500 text-white px-4 rounded-xl">{{status}}</span>
+        <span *ngIf="status != 'open'" class="bg-red-500 text-white px-4 rounded-xl">{{status}}</span>
+      </div>
+    </div>
+    <p class="text-slate-700 text-md">
+      {{body}}
+    </p>
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-4 flex flex-col">
+        <p class="text-black font-bold text-md">
+          Created By:
+        </p>
+        <div class="flex flex-row gap-2">
+          <div class="flex flex-col overflow-hidden h-12 w-12 rounded-full justify-center">
+            <div class="flex flex-row justify-center">
+              <img src="{{avatarUrl}}" />
+            </div>
+          </div>
+          <div class="flex flex-col justify-center">
+            <p class="text-slate-700 text-md font-bold">{{user}}</p>
+            <p class="text-slate-700 text-md">
+              {{createdAt}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex flex-col px-6 mt-6">
+  <p class="text-2xl text-black font-bold">
+    Change Logs
+  </p>
+  <div class="ag-theme-alpine mt-2" style="width: 100%;">
+    <ag-grid-angular
+      style="width: 100%; height: 300px;"
+      class="ag-theme-alpine"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+      [datasource]="dataSource"
+      [pagination]="true"
+      >
+    </ag-grid-angular>
+  </div>
+  <div class="mt-4"></div>
+</div>

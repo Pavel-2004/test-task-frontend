@@ -18,6 +18,7 @@ function dateFormatter(params: any) {
 
 @Component({
   selector: 'app-view-organization',
+  standalone: true,
   imports: [
     CommonModule,  
     MatButtonModule,  
@@ -32,6 +33,14 @@ function dateFormatter(params: any) {
 
 export class ViewOrganizationComponent implements OnInit  {
   organizationId: string = '';
+  name: string = '';
+  url: string = '';
+  reposUrl: string = '';
+  description: string = '';
+  avatarUrl: string = '';
+  membersUrl: string = '';
+  createdAt: string = ''
+
   columnDefs = [
     { headerName: 'Repository Name', field: 'name', sortable: true, filter: 'agTextColumnFilter' },
     { headerName: 'Full Name', field: 'fullName', sortable: true, filter: 'agTextColumnFilter' }, 
@@ -40,8 +49,6 @@ export class ViewOrganizationComponent implements OnInit  {
     {
       headerName: 'Private', field: 'private', sortable: true, filter: 'agBooleanColumnFilter'
     },
-    { headerName: 'Creation Date', field: 'created_at', sortable: true, filter: 'agDateColumnFilter', valueFormatter: dateFormatter }, 
-    { headerName: 'Updated Date', field: 'updated_at', sortable: true, filter: 'agDateColumnFilter', valueFormatter: dateFormatter }, 
     { headerName: 'Action', sortable: false, filter: false, field: 'action', cellRenderer: (params: any) => {
       const button = document.createElement('button');
       button.innerText = 'View';
@@ -69,6 +76,7 @@ export class ViewOrganizationComponent implements OnInit  {
 
       this.gitHubService.getRepositories(sortModel, filterModel, startRow, endRow, this.organizationId)
         .subscribe(data => {
+          console.log(data, 'data')
           params.successCallback(data.rows, data.totalRecords);
         }, error => {
           params.failCallback();
@@ -80,5 +88,21 @@ export class ViewOrganizationComponent implements OnInit  {
 
   ngOnInit(): void {
     this.organizationId = this.route.snapshot.paramMap.get('id')!;
+    this.getOrganization()
+  }
+
+  getOrganization(): void {
+    this.gitHubService.getOrganization(this.organizationId)
+      .subscribe(data => {
+        this.avatarUrl = data.organization.avatar_url
+        this.name = data.organization.login
+        this.url = data.organization.url
+        this.reposUrl = data.organization.repos_url
+        this.membersUrl = data.organization.members_url
+        this.description = data.organization.description
+        this.createdAt = new Date(data.organization.created_at).toLocaleTimeString()
+      }, error => {
+        
+      })
   }
 }
